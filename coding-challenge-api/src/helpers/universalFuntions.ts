@@ -28,7 +28,7 @@ export const parseStoreCsv = () => {
 export const parseOrderCsv = (page: number,count: number) => {
     const csvFilePath = path.resolve(__dirname, '../../data/orders.csv');
 
-    const headers = ["Id","storeId","orderId","latest_ship_date","shipment_status","destination","items","orderValue"];
+    const headers = ["id","storeId","orderId","latest_ship_date","shipment_status","destination","items","orderValue"];
       
     const fileContent = fs.readFileSync(csvFilePath, { encoding: 'utf-8' });
     

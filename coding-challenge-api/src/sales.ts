@@ -5,8 +5,9 @@ import { Store, Order, Shipments } from "./interfaces"
 export async function getSales(req: any, res: any) {
     try {
         const page = parseInt(req.query.page) || 0;
+        const count = parseInt(req.query.count) || 5;
         const stores: Store[] = await parseStoreCsv();
-        const orders: Order[] = await parseOrderCsv(page,5);
+        const orders: Order[] = await parseOrderCsv(page,count);
         let mergedOrders = orders.map(obj => Object.assign(obj, stores.find(item => obj.storeId === item.storeId)));
         let shipments: Shipments[] = [];
         mergedOrders.forEach( item => {
@@ -22,7 +23,7 @@ export async function getSales(req: any, res: any) {
         res.status(200).json({
         data: {
             page,
-            count: 5,
+            count: count,
             shipments
         },
         message: "success"
